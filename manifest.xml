@@ -3,7 +3,7 @@
   xmlns="http://schemas.microsoft.com/office/appforoffice/1.1" 
   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
   xmlns:bt="http://schemas.microsoft.com/office/officeappbasictypes/1.0" 
-  xmlns:mailappor="http://schemas.microsoft.com/office/mailappversionoverrides/1.0" 
+  xmlns:mailappor="http://schemas.microsoft.com/office/mailappversionoverrides" 
   xsi:type="MailApp">
   
   <Id>a8b9c0d1-e2f3-4a5b-6c7d-8e9f0a1b2c3d</Id>
@@ -16,7 +16,6 @@
   <HighResolutionIconUrl DefaultValue="https://delightful-beach-07ae4f300.7.azurestaticapps.net/icon32.png"/>
   <SupportUrl DefaultValue="https://delightful-beach-07ae4f300.7.azurestaticapps.net"/>
 
-  <!-- 統合アプリ検証に必須の許可ドメイン宣言 -->
   <AppDomains>
     <AppDomain>https://delightful-beach-07ae4f300.7.azurestaticapps.net</AppDomain>
   </AppDomains>
@@ -45,7 +44,6 @@
     <Rule xsi:type="ItemIs" ItemType="Message" FormType="Read" />
   </Rule>
 
-  <!-- 単一の VersionOverrides 構造へ修正 -->
   <VersionOverrides xmlns="http://schemas.microsoft.com/office/mailappversionoverrides" xsi:type="VersionOverridesV1_0">
     <Description resid="ButtonTip"/>
     <Requirements>
@@ -55,9 +53,7 @@
     </Requirements>
     <Hosts>
       <Host xsi:type="MailHost">
-        <!-- Desktop ではなく DesktopFormFactor を使用 -->
         <DesktopFormFactor>
-          <!-- ExecuteFunction に必須となる FunctionFile 宣言 -->
           <FunctionFile resid="CommandsUrl"/>
           <ExtensionPoint xsi:type="MessageReadCommandSurface">
             <OfficeTab id="TabDefault">
@@ -81,7 +77,7 @@
         </DesktopFormFactor>
       </Host>
     </Hosts>
-    <!-- 全リソースの定義（順番：Images ➔ Urls ➔ ShortStrings ➔ LongStrings） -->
+
     <Resources>
       <bt:Images>
         <bt:Image id="Icon16" DefaultValue="https://delightful-beach-07ae4f300.7.azurestaticapps.net/icon16.png"/>
