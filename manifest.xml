@@ -3,7 +3,7 @@
   xmlns="http://schemas.microsoft.com/office/appforoffice/1.1" 
   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
   xmlns:bt="http://schemas.microsoft.com/office/officeappbasictypes/1.0" 
-  xmlns:mailappor="http://schemas.microsoft.com/office/mailappversionoverrides/1.0" 
+  xmlns:mailappor="http://schemas.microsoft.com/office/mailappversionoverrides" 
   xsi:type="MailApp">
   
   <Id>a8b9c0d1-e2f3-4a5b-6c7d-8e9f0a1b2c3d</Id>
@@ -12,7 +12,6 @@
   <DefaultLocale>ja-JP</DefaultLocale>
   <DisplayName DefaultValue="指定フォルダへ移動＆自動化"/>
   <Description DefaultValue="メールを指定フォルダへ移動し、送信者の自動作成ルールを生成します。"/>
-  <!-- アイコン画像（後述の注意点参照） -->
   <IconUrl DefaultValue="https://delightful-beach-07ae4f300.7.azurestaticapps.net/icon16.png"/>
   <HighResolutionIconUrl DefaultValue="https://delightful-beach-07ae4f300.7.azurestaticapps.net/icon32.png"/>
 
@@ -40,41 +39,51 @@
     <Rule xsi:type="ItemIs" ItemType="Message" FormType="Read" />
   </Rule>
 
-  <VersionOverrides xmlns="http://schemas.microsoft.com/office/mailappversionoverrides/1.0" xsi:type="VersionOverridesV1_0">
-    <VersionOverrides xmlns="http://schemas.microsoft.com/office/mailappversionoverrides/1.1" xsi:type="VersionOverridesV1_1">
-      <Hosts>
-        <Host xsi:type="MailHost">
-          <Desktop>
-            <!-- メッセージ詳細のアクションバー/右クリックメニューに拡張機能を追加 -->
-            <ExtensionPoint xsi:type="MessageContextMenu">
-              <OfficeTab id="TabContextMenu">
-                <Group id="AutoRuleGroup">
-                  <Label id="GroupLabel" DefaultValue="自動化操作"/>
-                  <Control xsi:type="Button" id="MoveAndRuleButton">
-                    <Label id="ButtonLabel" DefaultValue="指定フォルダへ移動＆自動化"/>
-                    <Supertip id="ButtonTip" DefaultValue="このメールを移動し、次回以降の同送信者メールの自動移動ルールを作成します。"/>
-                    <Icon>
-                      <bt:Image id="Icon16" DefaultValue="https://delightful-beach-07ae4f300.7.azurestaticapps.net/icon16.png"/>
-                    </Icon>
-                    <Action xsi:type="ExecuteFunction">
-                      <FunctionName>moveAndCreateRule</FunctionName>
-                    </Action>
-                  </Control>
-                </Group>
-              </OfficeTab>
-            </ExtensionPoint>
-          </Desktop>
-        </Host>
-      </Hosts>
+  <VersionOverrides xmlns="http://schemas.microsoft.com/office/mailappversionoverrides" xsi:type="VersionOverridesV1_0">
+    <Hosts>
+      <Host xsi:type="MailHost">
+        <Desktop>
+          <!-- 関数呼び出しに必要な設定 -->
+          <FunctionFile resid="CommandsUrl" />
+          <ExtensionPoint xsi:type="MessageReadCommandSurface">
+            <OfficeTab id="TabDefault">
+              <Group id="AutoRuleGroup">
+                <Label resid="GroupLabel" />
+                <Control xsi:type="Button" id="MoveAndRuleButton">
+                  <Label resid="ButtonLabel" />
+                  <Supertip resid="ButtonTip" />
+                  <Icon>
+                    <bt:Image resid="Icon16" size="16" />
+                    <bt:Image resid="Icon32" size="32" />
+                    <bt:Image resid="Icon80" size="80" />
+                  </Icon>
+                  <Action xsi:type="ExecuteFunction">
+                    <FunctionName>moveAndCreateRule</FunctionName>
+                  </Action>
+                </Control>
+              </Group>
+            </OfficeTab>
+          </ExtensionPoint>
+        </Desktop>
+      </Host>
+    </Hosts>
 
-      <Resources>
-        <bt:Images>
-          <bt:Image id="Icon16" DefaultValue="https://delightful-beach-07ae4f300.7.azurestaticapps.net/icon16.png"/>
-        </bt:Images>
-        <bt:Urls>
-          <bt:Url id="CommandsUrl" DefaultValue="https://delightful-beach-07ae4f300.7.azurestaticapps.net/commands.html"/>
-        </bt:Urls>
-      </Resources>
-    </VersionOverrides>
+    <Resources>
+      <bt:Images>
+        <bt:Image id="Icon16" DefaultValue="https://delightful-beach-07ae4f300.7.azurestaticapps.net/icon16.png" />
+        <bt:Image id="Icon32" DefaultValue="https://delightful-beach-07ae4f300.7.azurestaticapps.net/icon32.png" />
+        <bt:Image id="Icon80" DefaultValue="https://delightful-beach-07ae4f300.7.azurestaticapps.net/icon80.png" />
+      </bt:Images>
+      <bt:Urls>
+        <bt:Url id="CommandsUrl" DefaultValue="https://delightful-beach-07ae4f300.7.azurestaticapps.net/commands.html" />
+      </bt:Urls>
+      <bt:ShortStrings>
+        <bt:String id="GroupLabel" DefaultValue="自動化操作" />
+        <bt:String id="ButtonLabel" DefaultValue="指定フォルダへ移動＆自動化" />
+      </bt:ShortStrings>
+      <bt:LongStrings>
+        <bt:String id="ButtonTip" DefaultValue="このメールを移動し、次回以降の同送信者メールの自動移動ルールを作成します。" />
+      </bt:LongStrings>
+    </Resources>
   </VersionOverrides>
 </OfficeApp>
