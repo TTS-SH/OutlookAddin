@@ -3,7 +3,7 @@
   xmlns="http://schemas.microsoft.com/office/appforoffice/1.1" 
   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
   xmlns:bt="http://schemas.microsoft.com/office/officeappbasictypes/1.0" 
-  xmlns:mailappor="http://schemas.microsoft.com/office/mailappversionoverrides" 
+  xmlns:mailappor="http://schemas.microsoft.com/office/mailappversionoverrides/1.1" 
   xsi:type="MailApp">
   
   <Id>a8b9c0d1-e2f3-4a5b-6c7d-8e9f0a1b2c3d</Id>
@@ -14,6 +14,7 @@
   <Description DefaultValue="メールを指定フォルダへ移動し、送信者の自動作成ルールを生成します。"/>
   <IconUrl DefaultValue="https://delightful-beach-07ae4f300.7.azurestaticapps.net/icon16.png"/>
   <HighResolutionIconUrl DefaultValue="https://delightful-beach-07ae4f300.7.azurestaticapps.net/icon32.png"/>
+  <SupportUrl DefaultValue="https://delightful-beach-07ae4f300.7.azurestaticapps.net"/>
 
   <Hosts>
     <Host Name="Mailbox" />
@@ -39,11 +40,15 @@
     <Rule xsi:type="ItemIs" ItemType="Message" FormType="Read" />
   </Rule>
 
-  <VersionOverrides xmlns="http://schemas.microsoft.com/office/mailappversionoverrides" xsi:type="VersionOverridesV1_0">
+  <VersionOverrides xmlns="http://schemas.microsoft.com/office/mailappversionoverrides/1.1" xsi:type="VersionOverridesV1_1">
+    <Requirements>
+      <bt:Sets DefaultMinVersion="1.3">
+        <bt:Set Name="Mailbox" />
+      </bt:Sets>
+    </Requirements>
     <Hosts>
       <Host xsi:type="MailHost">
-        <Desktop>
-          <!-- 関数呼び出しに必要な設定 -->
+        <DesktopFormFactor>
           <FunctionFile resid="CommandsUrl" />
           <ExtensionPoint xsi:type="MessageReadCommandSurface">
             <OfficeTab id="TabDefault">
@@ -64,7 +69,7 @@
               </Group>
             </OfficeTab>
           </ExtensionPoint>
-        </Desktop>
+        </DesktopFormFactor>
       </Host>
     </Hosts>
 
